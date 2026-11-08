@@ -1,0 +1,37 @@
+// c = índice (0 = a, 1 = b, 2 = c, 3 = d) de la respuesta correcta
+(window.QUIZ_DATA = window.QUIZ_DATA || []).push({
+  title: "Tema 04 · Protección contra sobreintensidades y sobretensiones",
+  sub: "PSIST",
+  questions: [
+    {t:"En el eje horizontal de una curva de disparo se suele indicar:",o:["El tiempo de disparo","La intensidad consumida por la instalación","La división entre la intensidad demandada y la intensidad nominal del magnetotérmico","Todas son falsas"],c:2},
+    {t:"Respecto a los materiales de la instalación como es el punto de fusión del material del fusible:",o:["No tiene relación","Menor","Igual","Mayor"],c:1},
+    {t:"De que depende el cálculo del valor de la denominada intensidad que garantiza el funcionamiento efectivo de la protección (If):",o:["Del calibre del fusible","Todas son falsas","De la tensión de suministro","De la intensidad máxima que soporta la instalación"],c:0},
+    {t:"Cual de estos parámetros NO es necesario para poder seleccionar un fusible",o:["Intensidad Nominal","Poder de Corte","Todos son necesarios","Tamaño"],c:2},
+    {t:"En que se diferencian las distintas curvas de disparo en las que se clasifican los Int.Magnetotérmicos",o:["En la tensión de disparo","Todas son falsas","En el rango de intensidad en que se produce el disparo magnetotérmico","En la intensidad Nominal"],c:2},
+    {t:"Dentro de las condiciones para que el fusible proteja contra sobrecargas se considera que:",o:["La intensidad maxima admisible (Iz) debe de ser menor que la Intensidad de calculo (Ib)","La intensidad nominal (In) debe de ser menor que la Intensidad de calculo (Ib)","La intensidad maxima admisible (Iz) debe de ser menor que la Intensidad nominal (In)","Todas son falsas"],c:3},
+    {t:"Con cuantas letras se identifica el tipo de fusibles",o:["2","4","3","1"],c:0},
+    {t:"Cuales de los siguientes parámetros son necesarios en la selección de un Int.Magnetotérmico",o:["Curva de Disparo","Intensidad Nominal","Todas son correctas","Poder de Corte"],c:2},
+    {t:"En cuantas clases pueden clasificarse los Limitadores de Tensión",o:["Cuatro","Tres","Cinco","Dos"],c:1},
+    {t:"Generalmente a partir de que distancia entre el limitador y el receptor se considera necesario instalar otro limitador",o:["5 metros","10 metros","30 metros","20 metros"],c:2},
+    {t:"La selectividad total de las protecciones con varios Int.Magnetotérmicos en cascada se consigue cuando:",o:["Las curvas de disparo se tocan en un solo punto","Las curvas de disparo no se tocan en ningún punto","Todas son falsas","Las curvas de disparo coinciden"],c:1},
+    {t:"Cual de las siguientes pueden ser causas de sobretensiones permanentes",o:["Defectos en los centros de transformación.","Todas son correctas","Cortes del neutro en la red de distribución.","Defectos de conexión del conductor neutro."],c:1},
+    {t:"Que clase de limitador ha de utilizarse para proteger ordenadores, televisores, etc",o:["Clase 1","Clase 2","Clase 4","Clase 3"],c:3},
+    {t:"Cuantos tipos de curvas de disparo son las habituales:",o:["Todas son falsas","Tres (B,C y D)","Una (B)","Dos (B y D)"],c:1},
+    {t:"Que tipo de dispro permite la reconexión inmediata de un Interruptor Magnetotérmico",o:["Todas son correctas","Por sobrecarga","Por sobrecalentamiento","Por cortocircuito"],c:3},
+    {t:"Respecto a la Tensión soportada por los equipos receptores, estos se clasifican en:",o:["Dos Categorías","Tres Categorías","Cinco Categorias","Cuatro Categorías"],c:3},
+    {t:"Dentro de las condiciones para que el Int.Magnetotérmico proteja contra sobrecargas se considera que:",o:["La intensidad nominal (In) debe de ser menor que la Intensidad de calculo (Ib)","La intensidad maxima admisible (Iz) debe de ser menor que la Intensidad nominal (In)","La intensidad maxima admisible (Iz) debe de ser menor que la Intensidad de calculo (Ib)","Todas son falsas"],c:3},
+    {t:"Los dispositivos denominados \"Bobinas de Disparo de Sobretensión\" se utilizan para proteger de:",o:["Sobretensiones Transitorias","Sobretensiones Permanentes","Todas son falsas","Sobretensiones Espureas"],c:1},
+    {t:"Los dispositivos denominados \"Limitadores de Tensión\" se utilizan para proteger de:",o:["Sobretensiones Espureas","Sobretensiones Transitorias","Sobretensiones Permanentes","Todas son falsas"],c:1},
+    {t:"Respecto al Poder de corte de un dispositivo de protección de sobreintensidades debera ser:",o:["Mayor o Igual a la instensidad de cortocircuito máxima","Menor o Igual a la instensidad de cortocircuito máxima","No tiene relación","Mayor o Igual a la instensidad de cortocircuito mínima"],c:0},
+    {t:"En que ITC del REBT se detallan las características que deben de cumplir los dispositivos contra Sobretensiones.",o:["ITC-BT-22","ITC-BT-21","ITC-BT-23","ITC-BT-20"],c:2},
+    {t:"Una Sobretensión por encima del 10% de la tensión nominal (230 V) que se mantienen durante varios ciclos se denomina:",o:["Transitoria solo si es debida a maniobras en la red","Todas son falsas","Transitoria","Permanente"],c:3},
+    {t:"En que ITC del REBT se detallan las características que deben de cumplir los dispositivos contra sobreintensidades.",o:["ITC-BT-21","ITC-BT-22","ITC-BT-23","ITC-BT-20"],c:1},
+    {t:"La curva de disparo de un Int.Magnetotérmico relaciona:",o:["El poder de corte con la intensidad de paso","La intensidad de paso con el tiempo que tarda en fundirse","La tensión con la velocidad de disparo","Todas son falsas"],c:1},
+    {t:"Indicar cuales de los siguientes NO es un tipo de selectividad de protecciones cuando existen varios Int.Magnetotérmicos en cascada",o:["Selectividad Amperimétrica","Selectividad Cronométrica","Filiación","Todos son tipos de selectividad"],c:3},
+    {t:"Cuales de las siguientes denominaciones pertenece a un determinado tipo de fusible",o:["Todas son falsas","Zt","aL","gG"],c:3},
+    {t:"Que clase de limitador ha de utilizarse en instalaciones con riesgo elevado de descarga eléctrica como por ejemplo repetidores de telefonía, parques eólicos, etc",o:["Clase 2","Clase 1","Clase 4","Clase 3"],c:1},
+    {t:"La curva de disparo de un fusible relaciona:",o:["Todas son falsas","El poder de corte con la intensidad de paso","La tensión con la velocidad de disparo","La intensidad de paso con el tiempo que tarda en fundirse"],c:3},
+    {t:"Cual de las siguientes pueden ser causas de sobretensiones transitorias",o:["Descargas atmosféricas","Maniobras en la red","Todas son correctas","Sobretensiones Inducidas"],c:2},
+    {t:"Respecto a la tensión soportada por los ordenadores, Televisores, equipos electrónicos, etc, estos corresponden a equipos de Categoría:",o:["Tres","Dos","Uno","Cuatro"],c:2}
+  ]
+});
