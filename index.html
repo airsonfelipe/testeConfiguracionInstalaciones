@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FEMPA · Test de Instalaciones Eléctricas</title>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#1b2133;--mut:#6b7389;--line:#e2e6f0;--acc:#4f46e5;--acc2:#7c3aed;--ok:#16a34a;--okbg:#e8f8ee;--ko:#dc2626;--kobg:#fdecec;--sh:0 8px 30px rgba(30,40,90,.08)}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1220;--card:#181c31;--ink:#e9ecf8;--mut:#9aa2bf;--line:#2a3050;--okbg:#10301f;--kobg:#3a1517;--sh:0 8px 30px rgba(0,0,0,.4)}}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+header{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;padding:36px 20px 70px;text-align:center}
+header h1{margin:0 0 6px;font-size:clamp(1.5rem,4vw,2.2rem)}
+header p{margin:0;opacity:.85}
+main{max-width:760px;margin:-44px auto 40px;padding:0 16px}
+.card{background:var(--card);border-radius:18px;box-shadow:var(--sh);padding:24px;margin-bottom:16px}
+.grid{display:grid;gap:12px}
+.tema{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:14px;padding:16px 18px;font:inherit;cursor:pointer;transition:.15s}
+.tema:hover{border-color:var(--acc);transform:translateY(-2px)}
+.tema b{display:block;font-size:1.05rem}.tema span{color:var(--mut);font-size:.9rem}
+.pill{background:var(--acc);color:#fff;border-radius:99px;padding:4px 12px;font-size:.85rem;white-space:nowrap}
+.opts{margin:14px 0 0;display:grid;gap:10px}
+label.row{display:flex;gap:8px;align-items:center;color:var(--mut);font-size:.9rem;margin-top:14px}
+.top{display:flex;justify-content:space-between;align-items:center;color:var(--mut);font-size:.9rem;margin-bottom:10px}
+.bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden;margin-bottom:20px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .3s}
+h2.q{font-size:1.2rem;line-height:1.5;margin:0}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:12px;padding:13px 15px;font:inherit;cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--acc);background:color-mix(in srgb,var(--acc) 6%,var(--card))}
+.opt .l{flex:none;width:28px;height:28px;border-radius:50%;background:var(--line);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.opt:disabled{cursor:default}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}.opt.ok .l{background:var(--ok);color:#fff}
+.opt.ko{border-color:var(--ko);background:var(--kobg)}.opt.ko .l{background:var(--ko);color:#fff}
+.fb{margin-top:16px;padding:12px 14px;border-radius:12px;font-weight:600}
+.fb.ok{background:var(--okbg);color:var(--ok)}.fb.ko{background:var(--kobg);color:var(--ko)}
+.btn{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;border:0;border-radius:12px;padding:12px 22px;font:inherit;font-weight:600;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--acc);border:2px solid var(--acc)}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
+.score{font-size:3rem;font-weight:800;text-align:center;margin:6px 0;background:linear-gradient(135deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.rev{border-top:1px solid var(--line);padding:12px 0;font-size:.95rem}
+.rev small{color:var(--ok);display:block;margin-top:4px}
+.hide{display:none}
+</style>
+</head>
+<body>
+<header><h1>⚡ FEMPA · Test de Electricidad</h1><p>Técnico Superior en Sistemas Electrotécnicos y Automatizados</p></header>
+<main id="app"></main>
+<script src="data/tema02.js"></script>
+<script src="data/tema03.js"></script>
+<script>
+const app=document.getElementById('app'),DATA=window.QUIZ_DATA||[],L='abcdefghij';
+let qs=[],i=0,score=0,wrong=[],answered=false,shuffle=false,cur=null;
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+function home(){
+  app.innerHTML=`<div class="card"><h2 style="margin-top:0">Elige un tema</h2><div class="grid">`+
+  DATA.map((t,k)=>`<button class="tema" data-k="${k}"><div><b>${esc(t.title)}</b><span>${esc(t.sub||'')}</span></div><div class="pill">${t.questions.length} preguntas</div></button>`).join('')+
+  `</div><label class="row"><input type="checkbox" id="sh"> Orden aleatorio de las preguntas</label></div>`;
+  app.querySelectorAll('.tema').forEach(b=>b.onclick=()=>start(+b.dataset.k));
+}
+function start(k){
+  shuffle=document.getElementById('sh').checked;cur=DATA[k];
+  qs=[...cur.questions];
+  if(shuffle)qs.sort(()=>Math.random()-.5);
+  i=0;score=0;wrong=[];show();
+}
+function show(){
+  const q=qs[i];answered=false;
+  app.innerHTML=`<div class="card"><div class="top"><span>${esc(cur.title)}</span><span>Pregunta ${i+1} / ${qs.length}</span></div>
+  <div class="bar"><i style="width:${i/qs.length*100}%"></i></div>
+  <h2 class="q">${esc(q.t)}</h2>
+  <div class="opts">${q.o.map((o,k)=>`<button class="opt" data-k="${k}"><span class="l">${L[k].toUpperCase()}</span><span>${esc(o)}</span></button>`).join('')}</div>
+  <div id="fb"></div>
+  <div class="actions"><button class="btn ghost" id="exit">Salir</button><button class="btn hide" id="next">${i+1<qs.length?'Siguiente →':'Ver resultado'}</button></div></div>`;
+  app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.k));
+  document.getElementById('exit').onclick=home;
+  document.getElementById('next').onclick=()=>{i++;i<qs.length?show():end()};
+}
+function pick(k){
+  if(answered)return;answered=true;
+  const q=qs[i],ok=k===q.c,btns=app.querySelectorAll('.opt');
+  btns.forEach((b,j)=>{b.disabled=true;if(j===q.c)b.classList.add('ok')});
+  if(ok)score++;else{btns[k].classList.add('ko');wrong.push(q)}
+  document.getElementById('fb').innerHTML=ok?`<div class="fb ok">✓ ¡Correcto!</div>`:`<div class="fb ko">✗ Incorrecto. La respuesta correcta es: ${esc(q.o[q.c])}</div>`;
+  document.getElementById('next').classList.remove('hide');
+}
+function end(){
+  const p=Math.round(score/qs.length*100);
+  app.innerHTML=`<div class="card"><div class="top"><span>${esc(cur.title)}</span><span>Resultado</span></div>
+  <div class="score">${score} / ${qs.length}</div><p style="text-align:center;color:var(--mut);margin-top:0">${p}% de aciertos</p>
+  ${wrong.length?`<h3>Preguntas falladas</h3>`+wrong.map(q=>`<div class="rev">${esc(q.t)}<small>✓ ${esc(q.o[q.c])}</small></div>`).join(''):`<p style="text-align:center">🎉 ¡Sin errores!</p>`}
+  <div class="actions"><button class="btn ghost" id="home">Inicio</button><button class="btn" id="again">Repetir tema</button></div></div>`;
+  document.getElementById('home').onclick=home;
+  document.getElementById('again').onclick=()=>start(DATA.indexOf(cur));
+}
+home();
+</script>
+</body>
+</html>
